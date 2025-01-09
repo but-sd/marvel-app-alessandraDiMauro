@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { getCharacters } from '../api/characters-api'; // recup des perso
+import { getCharacters } from '../api/characters-api';
 
 const Compare2CharactersPage = () => {
     document.title = "Compare 2 | Marvel App";
 
-    const characters = getCharacters(); 
+    const characters = getCharacters();
     const options = characters.map((character, index) => ({
         value: index,
         label: character.name,
@@ -53,10 +53,11 @@ const Compare2CharactersPage = () => {
                 </thead>
                 <tbody>
                     {Object.keys(selectedCharacters[0]).map((key) => (
+                        // Vérification : Affiche uniquement si la valeur est une chaîne ou un nombre
                         <tr key={key}>
                             <td>{key}</td>
-                            <td>{selectedCharacters[0][key]}</td>
-                            <td>{selectedCharacters[1][key]}</td>
+                            <td>{typeof selectedCharacters[0][key] === 'object' ? JSON.stringify(selectedCharacters[0][key]) : selectedCharacters[0][key]}</td>
+                            <td>{typeof selectedCharacters[1][key] === 'object' ? JSON.stringify(selectedCharacters[1][key]) : selectedCharacters[1][key]}</td>
                         </tr>
                     ))}
                 </tbody>
